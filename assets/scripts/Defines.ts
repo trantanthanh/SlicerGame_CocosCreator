@@ -20,3 +20,11 @@ export enum ActionSystem
     RESUME,
     BACK
 }
+
+export enum ActionSound
+{
+    PAUSE,
+    PLAY,
+    PLAY_ONE_SHOT,
+    STOP
+}

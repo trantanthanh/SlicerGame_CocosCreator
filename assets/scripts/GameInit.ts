@@ -22,14 +22,20 @@ export class GameInit extends Component {
     }
 
     Alignment() {
-        let viewDesign = view.getDesignResolutionSize();
-        let isMigGamePortrait = viewDesign.width < viewDesign.height;
+        // let viewDesign = view.getDesignResolutionSize();
+        // let isMigGamePortrait = viewDesign.width < viewDesign.height;
+        let isMigGamePortrait = false;
         let isHostGamePortrait = window.innerWidth < window.innerHeight
         let viewVisible = view.getVisibleSize();
 
-        if (isMigGamePortrait === isHostGamePortrait) {
+        if (isMigGamePortrait === isHostGamePortrait) {//all are landscape
             let ratio = window.innerHeight / window.innerWidth;
             view.setOrientation(macro.ORIENTATION_LANDSCAPE);
+            this.landscape.active = true;
+            this.landscape.getComponent(UITransform).setContentSize(viewVisible.width, viewVisible.width * ratio);
+        }
+        else {
+            let ratio = window.innerWidth / window.innerHeight;
             this.landscape.active = true;
             this.landscape.getComponent(UITransform).setContentSize(viewVisible.width, viewVisible.width * ratio);
         }

@@ -1,4 +1,27 @@
 import { assetManager, ImageAsset, SpriteFrame, Texture2D } from "cc";
+import EventManager from "./EventManager";
+import { ActionSound, EventType } from "../Defines";
+
+export function EmitSoundOneShot(...soundTrack: string[]) {
+    let paramaters = {
+        action: ActionSound.PLAY_ONE_SHOT,
+        data: {
+            soundTrack: soundTrack,
+        }
+    }
+    EventManager.Instance.emit(EventType.SOUND, paramaters);
+}
+
+export function PlaySound(soundTrack: string, isLoop: boolean = false) {
+    let paramaters = {
+        action: ActionSound.PLAY,
+        data: {
+            soundTrack: soundTrack,
+            loop: isLoop
+        }
+    }
+    EventManager.Instance.emit(EventType.SOUND, paramaters);
+}
 
 /**
  * Random a float number
