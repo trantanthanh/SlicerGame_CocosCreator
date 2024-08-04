@@ -1,5 +1,5 @@
 
-import { _decorator, Component, AudioClip, AudioSource, game, director } from 'cc';
+import { _decorator, Component, AudioClip, AudioSource, director } from 'cc';
 import EventManager from '../core/EventManager';
 import { RandInt } from '../core/Utils';
 import { ActionSound, EventType } from '../Defines';
