@@ -14,6 +14,8 @@ export class Interstitial extends Component {
     @property(Fade)
     fadeScreen: Fade;
 
+    isPlayClicked : boolean = false;
+
     onLoad() {
     }
 
@@ -32,6 +34,11 @@ export class Interstitial extends Component {
     }
 
     Play() {
+        if (this.isPlayClicked) {
+            return;
+        }
+        EventManager.Instance.off(EventType.SYSTEM, this.OnInterruptEvent, this);
+        this.isPlayClicked = true;
         EmitSoundOneShot("SFX_START");
         this.fadeScreen.in(() => {
             this.Switch2Loading();
@@ -40,6 +47,7 @@ export class Interstitial extends Component {
 
     Switch2Loading() {
         this.loading.active = true;
+        this.node.active = false;
     }
 
     OnInterruptEvent(parameters: any) {
