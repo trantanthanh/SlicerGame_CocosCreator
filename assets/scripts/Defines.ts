@@ -10,6 +10,7 @@ export enum EventType
     INGAME = "ingame",
     INGAME_EFFECT = "ingame_effect",
     RESULT = "result",
+    POPUP_TUTORIAL = "popup_tutorial",
     SYSTEM = "system",
     SOUND = "sound",
 }
