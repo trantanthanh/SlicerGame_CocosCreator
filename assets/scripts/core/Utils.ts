@@ -23,6 +23,14 @@ export function PlaySound(soundTrack: string, isLoop: boolean = false) {
     EventManager.Instance.emit(EventType.SOUND, paramaters);
 }
 
+export function PauseMusic()
+{
+    let paramaters = {
+        action: ActionSound.PAUSE,
+    }
+    EventManager.Instance.emit(EventType.SOUND, paramaters);
+}
+
 /**
  * Random a float number
  * @param min
