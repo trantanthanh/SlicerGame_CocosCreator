@@ -1,7 +1,7 @@
 
 import { _decorator, Component } from 'cc';
 import EventManager from './core/EventManager';
-import { EventType } from './Defines';
+import { ActionIngame, EventType } from './Defines';
 import { PlaySound } from './core/Utils';
 import { Ingame } from './states/Ingame';
 import { Result } from './states/Result';
@@ -22,8 +22,7 @@ export class GameManager extends Component {
         this.viewIngame.node.active = true;
     }
 
-    onDestroy()
-    {
+    onDestroy() {
         EventManager.Instance.off(EventType.INGAME, this.OnIngameEvent, this);
         EventManager.Instance.off(EventType.RESULT, this.OnResultEvent, this);
         EventManager.Instance.off(EventType.POPUP_TUTORIAL, this.OnPopupTutorialEvent, this);
@@ -36,7 +35,16 @@ export class GameManager extends Component {
     }
 
     OnIngameEvent(paramaters: any) {
+        switch (paramaters.action) {
+            case ActionIngame.TIMEOUT:
+                this.viewIngame.node.active = false;
+                this.viewResult.node.active = true;
+                break;
 
+            case ActionIngame.EXIT:
+                this.viewIngame.Pause();
+                break;
+        }
     }
 
     OnResultEvent(paramaters: any) {

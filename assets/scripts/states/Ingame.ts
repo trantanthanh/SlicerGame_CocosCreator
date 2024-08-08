@@ -62,6 +62,18 @@ export class Ingame extends Component {
         this.SetState(STATE.PLAY);
     }
 
+    Pause() {
+        if (this.state == STATE.PLAY) {
+            this.SetState(STATE.PAUSE);
+        }
+    }
+
+    Resume() {
+        if (this.state == STATE.PAUSE) {
+            this.SetState(STATE.RESUME);
+        }
+    }
+
     EndGame() {
         this.isGameStarted = false
         this.isFirstLaunch = false;

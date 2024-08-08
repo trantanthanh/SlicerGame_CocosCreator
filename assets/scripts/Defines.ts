@@ -22,6 +22,7 @@ export enum ActionSystem {
 export enum ActionIngame
 {
     TIMEOUT,
+    EXIT,
     CLEAR_ITEMS,
     SPAWN_WAVE,
     GET_SCORE,
