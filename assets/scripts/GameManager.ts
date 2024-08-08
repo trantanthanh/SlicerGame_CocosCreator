@@ -30,7 +30,6 @@ export class GameManager extends Component {
     }
 
     start() {
-        PlaySound("M_LIC_KT_BGM", true);
     }
 
     update(deltaTime: number) {
