@@ -62,8 +62,7 @@ export class Ingame extends Component {
         this.SetState(STATE.PLAY);
     }
 
-    EndGame()
-    {
+    EndGame() {
         this.isGameStarted = false
         this.isFirstLaunch = false;
         PauseMusic();
@@ -127,12 +126,48 @@ export class Ingame extends Component {
             .start()
     }
 
+    UpdateTimer(time: number) {
+        if (time <= Config.GAME_TIMER_WARNING) {
+            if (this.previousTime != Math.floor(time)) {
+                this.previousTime = Math.floor(time);
+                PlaySound("SFX_UI_TIME_OVER");
+            }
+        }
+        this.labelTimer.string = Math.floor(time) + "\"";
+    }
+
     start() {
 
     }
 
     update(deltaTime: number) {
+        switch (this.state) {
+            case STATE.TUTORIAL:
+                break;
 
+            case STATE.PLAY:
+                this.timerMain.Update(deltaTime);
+                this.UpdateTimer(this.timerMain.GetTime());
+                if (this.timerMain.IsDone()) {
+                    PlaySound("SFX_UI_TIME_OVER");
+                    this.SetState(STATE.TIMES_UP);
+                }
+                break;
+
+            case STATE.PAUSE:
+                break;
+
+            case STATE.RESUME:
+                break;
+
+            case STATE.TIMEOUT:
+                break;
+            case STATE.TIMES_UP:
+                if (!this.textTimesUp.active) {
+                    this.EndGame();
+                }
+                break;
+        }
     }
 }
 
